@@ -1,0 +1,143 @@
+@import "tailwindcss";
+@import "@fontsource/vazirmatn/400.css";
+@import "@fontsource/vazirmatn/500.css";
+@import "@fontsource/vazirmatn/600.css";
+@import "@fontsource/vazirmatn/700.css";
+@import "@fontsource/vazirmatn/800.css";
+@import "@fontsource/vazirmatn/900.css";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --color-saffron: #e8a93b;
+  --color-saffron-2: #f3c969;
+  --color-pomegranate: #b3273e;
+  --color-pomegranate-2: #e0445f;
+  --color-turquoise: #0fa3a3;
+  --color-turquoise-2: #4fd1c5;
+  --color-pistachio: #7a9b57;
+  --color-pistachio-2: #a8c686;
+  --color-plum: #6b3a52;
+  --color-plum-2: #9a5f7d;
+
+  --bg: #fdf9f1;
+  --bg-soft: #f7efe0;
+  --surface: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.6);
+  --ink: #261c14;
+  --ink-soft: #6b5b4a;
+  --border-soft: rgba(38, 28, 20, 0.08);
+  --ring: rgba(232, 169, 59, 0.45);
+}
+
+.dark {
+  --bg: #100c1a;
+  --bg-soft: #181227;
+  --surface: #1c1530;
+  --surface-glass: rgba(28, 21, 48, 0.55);
+  --ink: #f3ecf9;
+  --ink-soft: #b3a6c7;
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --ring: rgba(232, 169, 59, 0.35);
+}
+
+@theme inline {
+  --font-sans: "Vazirmatn", system-ui, sans-serif;
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-border-soft: var(--border-soft);
+  --color-saffron: var(--color-saffron);
+  --color-saffron-2: var(--color-saffron-2);
+  --color-pomegranate: var(--color-pomegranate);
+  --color-pomegranate-2: var(--color-pomegranate-2);
+  --color-turquoise: var(--color-turquoise);
+  --color-turquoise-2: var(--color-turquoise-2);
+  --color-pistachio: var(--color-pistachio);
+  --color-pistachio-2: var(--color-pistachio-2);
+  --color-plum: var(--color-plum);
+  --color-plum-2: var(--color-plum-2);
+}
+
+* {
+  border-color: var(--border-soft);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+::selection {
+  background: var(--color-saffron);
+  color: #1a1206;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-saffron);
+  border-radius: 999px;
+}
+
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--border-soft);
+}
+
+.gradient-text {
+  background: linear-gradient(90deg, var(--color-saffron) 0%, var(--color-pomegranate) 55%, var(--color-plum) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-noise {
+  background-image: radial-gradient(circle at 20% 20%, rgba(232, 169, 59, 0.12), transparent 40%),
+    radial-gradient(circle at 80% 0%, rgba(179, 39, 62, 0.12), transparent 45%),
+    radial-gradient(circle at 50% 100%, rgba(15, 163, 163, 0.1), transparent 40%);
+}
+
+.shadow-warm {
+  box-shadow: 0 20px 60px -25px rgba(179, 39, 62, 0.35), 0 8px 20px -12px rgba(38, 28, 20, 0.15);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+.animate-float-slow {
+  animation: float-slow 7s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(14px) rotate(-4deg); }
+}
+.animate-float-slower {
+  animation: float-slower 9s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background-size: 200% 100%;
+  animation: shimmer 2.4s linear infinite;
+}
