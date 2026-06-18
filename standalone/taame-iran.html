@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>طعم ایران | دانشنامه آشپزی و غذاهای سنتی ایرانی</title>
+<meta name="description" content="دانشنامه دیجیتال آشپزی ایرانی با معرفی کامل غذاهای سنتی، تاریخ، فرهنگ و مواد اولیه هر استان؛ به همراه نقشه تعاملی و جست‌وجوی پیشرفته.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script>
+(function () {
+  try {
+    var stored = localStorage.getItem('iranfood-theme');
+    if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    }
+  } catch (e) {}
+})();
+</script>
+<style>
+:root {
+  --saffron: #e8a93b;
+  --saffron-2: #f3c969;
+  --pomegranate: #b3273e;
+  --pomegranate-2: #e0445f;
+  --turquoise: #0fa3a3;
+  --turquoise-2: #4fd1c5;
+  --pistachio: #7a9b57;
+  --pistachio-2: #a8c686;
+  --plum: #6b3a52;
+  --plum-2: #9a5f7d;
+
+  --bg: #fdf9f1;
+  --bg-soft: #f7efe0;
+  --surface: #ffffff;
+  --surface-glass: rgba(255, 255, 255, 0.6);
+  --ink: #261c14;
+  --ink-soft: #6b5b4a;
+  --border-soft: rgba(38, 28, 20, 0.1);
+}
+html.dark {
+  --bg: #100c1a;
+  --bg-soft: #181227;
+  --surface: #1c1530;
+  --surface-glass: rgba(28, 21, 48, 0.55);
+  --ink: #f3ecf9;
+  --ink-soft: #b3a6c7;
+  --border-soft: rgba(255, 255, 255, 0.1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Vazirmatn", Tahoma, Arial, sans-serif;
+  transition: background-color .4s ease, color .4s ease;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, select, input { font-family: inherit; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 1.25rem; }
+::selection { background: var(--saffron); color: #1a1206; }
+
+/* ---------- utility ---------- */
+.glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  border: 1px solid var(--border-soft);
+}
+.gradient-text {
+  background: linear-gradient(90deg, var(--saffron) 0%, var(--pomegranate) 55%, var(--plum) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.shadow-warm { box-shadow: 0 20px 60px -25px rgba(179,39,62,.35), 0 8px 20px -12px rgba(38,28,20,.15); }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .4rem;
+  border-radius: 999px; font-weight: 700; font-size: .875rem; padding: .9rem 1.8rem;
+  cursor: pointer; border: none; transition: transform .3s ease, background .3s ease;
+}
+.btn-primary { background: linear-gradient(115deg, var(--saffron), var(--pomegranate)); color: #fff; box-shadow: 0 20px 60px -25px rgba(179,39,62,.45); }
+.btn-primary:hover { transform: scale(1.05); }
+.btn-outline { border: 1px solid var(--border-soft); color: var(--ink); background: transparent; }
+.btn-outline:hover { background: var(--bg-soft); }
+.pill { border-radius: 999px; font-size: .75rem; font-weight: 600; padding: .35rem 1rem; display: inline-block; }
+
+/* reveal-on-scroll */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1); }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+@keyframes floatSlow { 0%,100%{ transform: translateY(0) rotate(0deg);} 50%{ transform: translateY(-18px) rotate(3deg);} }
+@keyframes floatSlower { 0%,100%{ transform: translateY(0) rotate(0deg);} 50%{ transform: translateY(14px) rotate(-4deg);} }
+.float-slow { animation: floatSlow 7s ease-in-out infinite; }
+.float-slower { animation: floatSlower 9s ease-in-out infinite; }
+
+/* ---------- nav ---------- */
+header#nav {
+  position: sticky; top: 0; z-index: 50; transition: all .3s ease; background: transparent;
+}
+header#nav.scrolled { background: var(--surface-glass); backdrop-filter: blur(18px) saturate(160%); border-bottom: 1px solid var(--border-soft); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; padding: .8rem 1.25rem; max-width: 1280px; margin: 0 auto; }
+.brand { display: flex; align-items: center; gap: .5rem; font-weight: 800; font-size: 1.1rem; }
+.brand .logo {
+  width: 40px; height: 40px; border-radius: 16px; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--saffron), var(--pomegranate)); font-size: 1.2rem; box-shadow: 0 20px 60px -25px rgba(179,39,62,.45);
+}
+.nav-links { display: flex; align-items: center; gap: .2rem; }
+.nav-links a { padding: .55rem 1rem; border-radius: 999px; font-size: .875rem; font-weight: 500; color: var(--ink-soft); transition: .2s; }
+.nav-links a:hover { background: var(--bg-soft); color: var(--ink); }
+.nav-right { display: flex; align-items: center; gap: .5rem; }
+.icon-btn {
+  width: 40px; height: 40px; border-radius: 999px; border: 1px solid var(--border-soft); background: var(--surface);
+  display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 1.05rem; transition: transform .3s, border-color .3s;
+}
+.icon-btn:hover { transform: scale(1.1); border-color: var(--saffron); }
+#mobileMenu { display: none; flex-direction: column; gap: .25rem; padding: .75rem 1.25rem 1rem; border-top: 1px solid var(--border-soft); }
+#mobileMenu a { padding: .8rem 1rem; border-radius: 14px; font-size: .9rem; color: var(--ink-soft); }
+#mobileMenu a:hover { background: var(--bg-soft); color: var(--ink); }
+@media (max-width: 820px) { .nav-links { display: none; } }
+@media (min-width: 821px) { #mobileToggle { display: none; } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; overflow: hidden; padding: 4rem 0 5rem; }
+.hero-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(circle at 20% 20%, rgba(232,169,59,.12), transparent 40%),
+              radial-gradient(circle at 80% 0%, rgba(179,39,62,.12), transparent 45%),
+              radial-gradient(circle at 50% 100%, rgba(15,163,163,.1), transparent 40%);
+}
+.blob { position: absolute; border-radius: 50%; filter: blur(60px); pointer-events: none; }
+.hero-grid { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; position: relative; }
+@media (min-width: 1024px) { .hero-grid { grid-template-columns: 1fr 1fr; } }
+.eyebrow { display: inline-flex; align-items: center; gap: .4rem; border-radius: 999px; padding: .4rem 1rem; font-size: .75rem; font-weight: 500; color: var(--ink-soft); }
+.hero h1 { font-size: 2.4rem; font-weight: 800; line-height: 1.3; margin: 1.4rem 0 0; }
+@media (min-width: 640px) { .hero h1 { font-size: 3rem; } }
+@media (min-width: 1024px) { .hero h1 { font-size: 3.5rem; } }
+.hero p.lead { margin-top: 1.4rem; max-width: 36rem; color: var(--ink-soft); font-size: 1rem; line-height: 1.9; }
+.hero-actions { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; }
+.hero-stats { margin-top: 2.4rem; display: flex; flex-wrap: wrap; gap: 2rem; }
+.stat-num { font-size: 1.5rem; font-weight: 800; color: var(--pomegranate); }
+.stat-label { font-size: .75rem; color: var(--ink-soft); }
+.hero-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 26rem; margin: 0 auto; width: 100%; }
+.hero-tile {
+  aspect-ratio: 1/1; border-radius: 1.6rem; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: .4rem; text-align: center; padding: 1rem;
+}
+.hero-tile .ico { font-size: 2.2rem; }
+.hero-tile .nm { font-size: .875rem; font-weight: 700; }
+.hero-tile .ct { font-size: .7rem; color: var(--ink-soft); }
+
+/* ---------- section heading ---------- */
+.section { padding: 5rem 0; }
+.section-soft { background: var(--bg-soft); }
+.heading { max-width: 42rem; margin: 0 auto; text-align: center; }
+.heading h2 { font-size: 1.9rem; font-weight: 800; margin: 1rem 0 0; }
+@media (min-width: 640px) { .heading h2 { font-size: 2.2rem; } }
+.heading p { margin-top: 1rem; color: var(--ink-soft); font-size: 1rem; line-height: 1.8; }
+.eyebrow-pill { background: var(--bg-soft); color: var(--pomegranate); font-weight: 700; }
+
+/* ---------- dish card ---------- */
+.dish-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 3rem; }
+@media (min-width: 640px) { .dish-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .dish-grid.cols-4 { grid-template-columns: repeat(4, 1fr); } .dish-grid.cols-3 { grid-template-columns: repeat(3,1fr); } }
+
+.dish-card {
+  position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 1.6rem;
+  border: 1px solid var(--border-soft); background: var(--surface); cursor: pointer;
+  transition: transform .5s cubic-bezier(.22,1,.36,1), box-shadow .5s ease;
+}
+.dish-card:hover { transform: translateY(-8px); box-shadow: 0 20px 60px -25px rgba(179,39,62,.35), 0 8px 20px -12px rgba(38,28,20,.15); }
+.dish-visual { position: relative; height: 11rem; width: 100%; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.dish-visual .ico { font-size: 3rem; position: relative; z-index: 2; filter: drop-shadow(0 6px 10px rgba(0,0,0,.25)); transition: transform .7s ease; }
+.dish-card:hover .dish-visual .ico { transform: scale(1.15); }
+.dish-visual::before, .dish-visual::after { content: ""; position: absolute; border-radius: 50%; background: rgba(255,255,255,.12); }
+.dish-visual::before { width: 14rem; height: 14rem; left: -3rem; bottom: -4rem; }
+.dish-visual::after { width: 10rem; height: 10rem; right: -2rem; top: -2rem; background: rgba(255,255,255,.16); }
+.dish-visual .fade { position: absolute; inset: 0 0 0 0; background: linear-gradient(to top, rgba(0,0,0,.35), transparent 60%); }
+.dish-visual .cat-tag { position: absolute; top: .75rem; right: .75rem; background: rgba(0,0,0,.35); color: #fff; font-size: .68rem; padding: .3rem .7rem; border-radius: 999px; backdrop-filter: blur(4px); z-index: 2; }
+.dish-body { padding: 1.2rem; display: flex; flex-direction: column; gap: .6rem; flex: 1; }
+.dish-body .row { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; }
+.dish-body h3 { margin: 0; font-size: 1.05rem; font-weight: 800; transition: color .2s; }
+.dish-card:hover .dish-body h3 { color: var(--pomegranate); }
+.tag-province { flex-shrink: 0; border: 1px solid var(--border-soft); border-radius: 999px; padding: .25rem .65rem; font-size: .68rem; color: var(--ink-soft); }
+.dish-body p.desc { margin: 0; font-size: .85rem; line-height: 1.6; color: var(--ink-soft); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.dish-meta { margin-top: auto; padding-top: .4rem; display: flex; align-items: center; gap: .5rem; font-size: .72rem; color: var(--ink-soft); }
+.dish-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-soft); opacity: .4; }
+
+/* accent gradients */
+.acc-saffron { background: linear-gradient(135deg, var(--saffron-2), var(--pomegranate)); }
+.acc-pomegranate { background: linear-gradient(135deg, var(--pomegranate-2), var(--plum)); }
+.acc-turquoise { background: linear-gradient(135deg, var(--turquoise-2), var(--turquoise)); }
+.acc-pistachio { background: linear-gradient(135deg, var(--pistachio-2), #3f5a2e); }
+.acc-plum { background: linear-gradient(135deg, var(--plum-2), #3a1f30); }
+
+/* category cards */
+.cat-grid { display: grid; grid-template-columns: 1fr; gap: 1.25rem; margin-top: 3rem; }
+@media (min-width: 640px) { .cat-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .cat-grid { grid-template-columns: repeat(3, 1fr); } }
+.cat-card {
+  position: relative; display: flex; align-items: center; gap: 1rem; overflow: hidden; border-radius: 1.6rem;
+  border: 1px solid var(--border-soft); padding: 1.4rem; cursor: pointer; transition: transform .5s ease;
+}
+.cat-card:hover { transform: translateY(-6px); }
+.cat-icon { flex-shrink: 0; width: 3.4rem; height: 3.4rem; border-radius: 1.1rem; background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; box-shadow: 0 4px 14px rgba(0,0,0,.08); transition: transform .5s ease; }
+.cat-card:hover .cat-icon { transform: scale(1.1) rotate(6deg); }
+.cat-card h3 { margin: 0; font-size: 1.05rem; font-weight: 800; }
+.cat-card p { margin: 0; font-size: .85rem; color: var(--ink-soft); }
+.cat-arrow { position: absolute; left: 1.25rem; font-size: 1.1rem; color: var(--ink-soft); opacity: 0; transition: opacity .3s; }
+.cat-card:hover .cat-arrow { opacity: 1; }
+
+/* map */
+.map-grid { display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 3rem; }
+@media (min-width: 1024px) { .map-grid { grid-template-columns: 1.1fr .9fr; } }
+.map-box { position: relative; aspect-ratio: 4/5; border-radius: 2.5rem; padding: 1.4rem; overflow: hidden; }
+@media (min-width: 640px) { .map-box { aspect-ratio: 1/1; } }
+.map-box svg { position: relative; width: 100%; height: 100%; }
+.map-dot { cursor: pointer; }
+.map-info { display: flex; flex-direction: column; height: 100%; border-radius: 2.5rem; padding: 2rem; }
+.map-info .region-tag { font-size: .75rem; font-weight: 700; color: var(--pomegranate); }
+.map-info h3 { margin: .5rem 0 0; font-size: 1.5rem; font-weight: 800; }
+.map-info .blurb { margin-top: 1rem; font-size: .9rem; line-height: 1.8; color: var(--ink-soft); }
+.map-info .count-pill { margin-top: 1.4rem; background: var(--bg-soft); border-radius: 999px; padding: .4rem .9rem; font-size: .85rem; font-weight: 700; display: inline-flex; width: fit-content; }
+.map-dish-chips { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: .5rem; }
+.map-dish-chip { display: flex; align-items: center; gap: .35rem; border: 1px solid var(--border-soft); background: var(--surface); border-radius: 999px; padding: .4rem .8rem; font-size: .75rem; font-weight: 500; cursor: pointer; transition: .2s; }
+.map-dish-chip:hover { border-color: var(--saffron); color: var(--pomegranate); }
+.map-info .view-all { margin-top: auto; padding-top: 1.6rem; font-size: .875rem; font-weight: 700; color: var(--pomegranate); cursor: pointer; }
+.province-buttons { margin-top: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+.province-btn { border-radius: 999px; border: 1px solid var(--border-soft); padding: .45rem 1rem; font-size: .75rem; font-weight: 500; color: var(--ink-soft); cursor: pointer; background: transparent; transition: .2s; }
+.province-btn.active { background: var(--pomegranate); border-color: var(--pomegranate); color: #fff; }
+.province-btn:hover:not(.active) { border-color: var(--saffron); color: var(--ink); }
+
+/* cta */
+.cta-box { position: relative; overflow: hidden; border-radius: 2.5rem; padding: 3rem 1.5rem; text-align: center; color: #fff; background: linear-gradient(115deg, var(--saffron), var(--pomegranate), var(--plum)); }
+@media (min-width: 640px) { .cta-box { padding: 4rem 3rem; } }
+.cta-box h2 { font-size: 1.6rem; font-weight: 800; margin: 0; }
+@media (min-width: 640px) { .cta-box h2 { font-size: 1.9rem; } }
+.cta-box p { max-width: 40rem; margin: 1rem auto 0; font-size: .95rem; line-height: 1.8; color: rgba(255,255,255,.88); }
+.cta-box .btn { margin-top: 2rem; background: #fff; color: var(--pomegranate); }
+
+/* explore */
+.explore-bar { position: sticky; top: 70px; z-index: 30; border-radius: 1.6rem; padding: 1.25rem; margin-bottom: 2rem; }
+.search-wrap { position: relative; }
+.search-wrap input { width: 100%; border-radius: 1rem; border: 1px solid var(--border-soft); background: var(--surface); padding: .9rem 2.7rem .9rem 1rem; font-size: .9rem; outline: none; transition: border-color .2s; color: var(--ink); }
+.search-wrap input:focus { border-color: var(--saffron); }
+.search-wrap .icon { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--ink-soft); }
+.filters-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.filters-row select { border-radius: .8rem; border: 1px solid var(--border-soft); background: var(--surface); color: var(--ink); padding: .6rem 1rem; font-size: .85rem; outline: none; }
+.filters-row select:focus { border-color: var(--saffron); }
+.filters-row .clear-btn { border-radius: .8rem; border: 1px solid var(--border-soft); padding: .6rem 1rem; font-size: .85rem; background: transparent; color: var(--ink-soft); cursor: pointer; }
+.filters-row .clear-btn:hover { background: var(--bg-soft); }
+.results-count { margin-bottom: 1.2rem; font-size: .85rem; color: var(--ink-soft); }
+.empty-state { border: 1px dashed var(--border-soft); border-radius: 1.6rem; padding: 4rem; text-align: center; color: var(--ink-soft); }
+
+/* footer */
+footer { position: relative; overflow: hidden; margin-top: 6rem; border-top: 1px solid var(--border-soft); background: var(--bg-soft); padding: 3.5rem 0; }
+.footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 640px) { .footer-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(4, 1fr); } }
+.footer-grid h4 { margin: 0 0 1rem; font-weight: 800; }
+.footer-grid p, .footer-grid li { font-size: .875rem; line-height: 1.8; color: var(--ink-soft); }
+.footer-grid ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .5rem; }
+.footer-grid li a:hover { color: var(--saffron); }
+.footer-bottom { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border-soft); display: flex; flex-direction: column; gap: .6rem; align-items: center; justify-content: space-between; font-size: .75rem; color: var(--ink-soft); }
+@media (min-width: 640px) { .footer-bottom { flex-direction: row; } }
+
+/* modal */
+#dishModal { position: fixed; inset: 0; z-index: 100; display: none; }
+#dishModal.open { display: block; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba(10,6,15,.55); backdrop-filter: blur(4px); }
+.modal-panel {
+  position: relative; max-width: 64rem; margin: 2.5rem auto; max-height: calc(100vh - 5rem); overflow-y: auto;
+  background: var(--bg); border-radius: 2rem; box-shadow: 0 30px 80px -20px rgba(0,0,0,.5);
+}
+.modal-close { position: absolute; top: 1rem; left: 1rem; z-index: 5; width: 40px; height: 40px; border-radius: 999px; background: rgba(0,0,0,.4); color: #fff; border: none; cursor: pointer; font-size: 1.1rem; }
+.modal-hero { position: relative; height: 16rem; border-radius: 2rem 2rem 0 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+.modal-hero .ico { font-size: 5rem; filter: drop-shadow(0 8px 16px rgba(0,0,0,.3)); }
+.modal-hero .overlay-text { position: absolute; inset-inline: 0; bottom: 0; padding: 1.6rem 2rem; background: linear-gradient(to top, rgba(0,0,0,.65), transparent); }
+.modal-hero .overlay-text .pill { background: rgba(255,255,255,.2); color: #fff; }
+.modal-hero .overlay-text h1 { color: #fff; margin: .6rem 0 0; font-size: 1.8rem; font-weight: 800; }
+.modal-body { padding: 2rem; display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
+@media (min-width: 900px) { .modal-body { grid-template-columns: 1.6fr 1fr; } }
+.modal-section h2 { font-size: 1.15rem; font-weight: 800; margin: 0 0 .8rem; }
+.modal-section p { font-size: .95rem; line-height: 1.9; color: var(--ink-soft); margin: 0; }
+.facts-list { list-style: none; padding: 0; margin: .8rem 0 0; display: flex; flex-direction: column; gap: .7rem; }
+.facts-list li { display: flex; gap: .6rem; background: var(--bg-soft); border-radius: 1rem; padding: .8rem 1rem; font-size: .85rem; line-height: 1.7; color: var(--ink-soft); }
+.modal-side { display: flex; flex-direction: column; gap: 1.2rem; }
+.side-card { border-radius: 1.6rem; padding: 1.4rem; border: 1px solid var(--border-soft); background: var(--surface-glass); backdrop-filter: blur(14px); }
+.side-card h3 { margin: 0 0 .8rem; font-size: .95rem; font-weight: 800; }
+.info-row { display: flex; align-items: center; justify-content: space-between; font-size: .82rem; border-bottom: 1px solid var(--border-soft); padding-bottom: .5rem; margin-bottom: .5rem; }
+.info-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.info-row .lbl { color: var(--ink-soft); }
+.info-row .val { font-weight: 700; }
+.ingredient-chip { border: 1px solid var(--border-soft); background: var(--bg); border-radius: 999px; padding: .35rem .8rem; font-size: .72rem; }
+.ingredients-wrap { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .8rem; }
+.related-section { padding: 0 2rem 2rem; }
+.related-section h2 { font-size: 1.1rem; font-weight: 800; margin-bottom: 1rem; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+</style>
+</head>
+<body>
+
+<header id="nav">
+  <div class="nav-inner">
+    <a href="#home" class="brand"><span class="logo">🍇</span><span><span class="gradient-text">طعم</span> ایران</span></a>
+    <nav class="nav-links">
+      <a href="#home">خانه</a>
+      <a href="#explore">دانشنامه غذاها</a>
+      <a href="#map">نقشه ایران</a>
+      <a href="#regions">مناطق</a>
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="themeToggle" aria-label="تغییر حالت روشن و تاریک">☀️</button>
+      <button class="icon-btn" id="mobileToggle" aria-label="باز کردن منو">☰</button>
+    </div>
+  </div>
+  <div id="mobileMenu">
+    <a href="#home">خانه</a>
+    <a href="#explore">دانشنامه غذاها</a>
+    <a href="#map">نقشه ایران</a>
+    <a href="#regions">مناطق</a>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="blob float-slow" style="width:18rem;height:18rem;right:-6rem;top:-6rem;background:rgba(232,169,59,.25);"></div>
+    <div class="blob float-slower" style="width:20rem;height:20rem;left:-6rem;top:10rem;background:rgba(179,39,62,.2);"></div>
+    <div class="blob float-slow" style="width:16rem;height:16rem;right:33%;bottom:0;background:rgba(15,163,163,.15);"></div>
+    <div class="container hero-grid">
+      <div class="reveal in">
+        <span class="eyebrow glass">✨ دانشنامه دیجیتال آشپزی ایرانی</span>
+        <h1>سفری به اعماق<br><span class="gradient-text">طعم‌های ایران‌زمین</span></h1>
+        <p class="lead">از قورمه‌سبزی خانگی تا کوفته بزرگ تبریزی؛ هر غذا روایتی از یک شهر، یک خانواده و قرن‌ها تجربه است. با ما همراه شوید تا تاریخ، فرهنگ و عطر غذاهای ایرانی را کشف کنید.</p>
+        <div class="hero-actions">
+          <a href="#explore" class="btn btn-primary">گشت‌وگذار در دانشنامه غذاها</a>
+          <a href="#map" class="btn btn-outline">کاوش روی نقشه ایران 🗺</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-num" id="statDishCount">+24</div><div class="stat-label">غذای ثبت‌شده</div></div>
+          <div><div class="stat-num">۱۲</div><div class="stat-label">استان و منطقه</div></div>
+          <div><div class="stat-num">۶</div><div class="stat-label">دسته آشپزی</div></div>
+        </div>
+      </div>
+      <div class="hero-tiles" id="heroTiles"></div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <div class="heading reveal">
+      <span class="pill eyebrow-pill">منتخب سرآشپزها</span>
+      <h2>غذاهای شاخص ایران</h2>
+      <p>گزیده‌ای از معروف‌ترین و محبوب‌ترین غذاهای ایرانی که هرکدام داستانی منحصربه‌فرد از یک منطقه دارند.</p>
+    </div>
+    <div class="dish-grid cols-4" id="featuredGrid"></div>
+    <div class="reveal" style="margin-top:3rem;display:flex;justify-content:center;">
+      <a href="#explore" class="btn btn-outline">مشاهده همه غذاها ←</a>
+    </div>
+  </section>
+
+  <section class="section section-soft" id="regions">
+    <div class="container">
+      <div class="heading reveal">
+        <span class="pill eyebrow-pill">دسته‌بندی غذاها</span>
+        <h2>هر دسته، دروازه‌ای به یک تجربه</h2>
+        <p>از خورش‌های دیرپز خانگی تا شیرینی‌های جشن؛ دسته‌بندی‌های آشپزی ایرانی را کاوش کنید.</p>
+      </div>
+      <div class="cat-grid" id="categoryGrid"></div>
+    </div>
+  </section>
+
+  <section class="section container" id="map">
+    <div class="heading reveal">
+      <span class="pill eyebrow-pill">کاوش جغرافیایی</span>
+      <h2>نقشه تعاملی طعم‌های ایران</h2>
+      <p>روی هر منطقه کلیک کنید تا غذاهای شاخص آن ناحیه از ایران را ببینید.</p>
+    </div>
+
+    <div class="map-grid">
+      <div class="reveal map-box glass shadow-warm">
+        <svg viewBox="0 0 100 100">
+          <defs>
+            <linearGradient id="iranFill" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#e8a93b" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#b3273e" stop-opacity="0.18"/>
+            </linearGradient>
+          </defs>
+          <path d="M28,12 L46,10 L58,16 L72,14 L82,22 L88,30 L84,38 L90,46 L86,56 L88,66 L78,76 L72,86 L62,92 L54,84 L46,90 L38,82 L30,86 L22,76 L16,66 L20,56 L12,46 L18,36 L14,26 L22,18 Z"
+            fill="url(#iranFill)" stroke="#b3273e" stroke-opacity="0.35" stroke-width="0.6"/>
+          <g id="mapDots"></g>
+        </svg>
+      </div>
+      <div class="reveal map-info glass shadow-warm" id="mapInfo"></div>
+    </div>
+    <div class="province-buttons" id="provinceButtons"></div>
+  </section>
+
+  <section class="section container">
+    <div class="reveal cta-box shadow-warm">
+      <h2>کنجکاوید بدانید سفره هر استان ایران چه طعمی دارد؟</h2>
+      <p>با جست‌وجوی پیشرفته دانشنامه، غذاها را بر اساس استان، مواد اولیه و نوع غذا فیلتر کنید و دستور پخت هرکدام را کشف کنید.</p>
+      <a href="#explore" class="btn">شروع جست‌وجو</a>
+    </div>
+  </section>
+
+  <section class="section container" id="explore">
+    <div class="heading reveal" style="margin-bottom: 2.5rem;">
+      <span class="pill eyebrow-pill">دانشنامه کامل</span>
+      <h2>همه غذاهای سنتی ایران</h2>
+      <p>از خورش‌های خانگی تا شیرینی‌های جشن؛ غذای موردنظرتان را با جست‌وجو یا فیلتر استان و دسته پیدا کنید.</p>
+    </div>
+
+    <div class="explore-bar glass shadow-warm">
+      <div class="search-wrap">
+        <input id="searchInput" type="text" placeholder="جست‌وجوی نام غذا، شهر یا مواد اولیه...">
+        <span class="icon">🔍</span>
+      </div>
+      <div class="filters-row">
+        <select id="categoryFilter"><option value="all">همه دسته‌ها</option></select>
+        <select id="provinceFilter"><option value="all">همه استان‌ها</option></select>
+        <button class="clear-btn" id="clearFilters" style="display:none;">حذف فیلترها ✕</button>
+      </div>
+    </div>
+
+    <p class="results-count" id="resultsCount"></p>
+    <div class="dish-grid cols-3" id="exploreGrid"></div>
+    <div class="empty-state" id="emptyState" style="display:none;">غذایی با این مشخصات پیدا نشد. فیلترها را تغییر دهید.</div>
+  </section>
+</main>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="brand" style="margin-bottom:.8rem;"><span class="logo">🍇</span><span><span class="gradient-text">طعم</span> ایران</span></div>
+        <p>دانشنامه دیجیتال آشپزی ایرانی؛ سفری در طعم، تاریخ و فرهنگ غذاهای سرزمین ایران از خزر تا خلیج فارس.</p>
+      </div>
+      <div>
+        <h4>دسترسی سریع</h4>
+        <ul>
+          <li><a href="#home">خانه</a></li>
+          <li><a href="#explore">دانشنامه غذاها</a></li>
+          <li><a href="#map">نقشه تعاملی ایران</a></li>
+          <li><a href="#regions">مناطق و استان‌ها</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>مناطق پرطرفدار</h4>
+        <ul id="footerProvinces"></ul>
+      </div>
+      <div>
+        <h4>درباره پروژه</h4>
+        <p>این وب‌سایت با عشق به فرهنگ و آشپزی ایرانی ساخته شده تا میراث طعم‌های سرزمین‌مان را زنده نگه دارد.</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© تمامی حقوق برای طعم ایران محفوظ است.</p>
+      <p>ساخته‌شده با ❤️ برای دوستداران آشپزی ایرانی</p>
+    </div>
+  </div>
+</footer>
+
+<div id="dishModal">
+  <div class="modal-backdrop" id="modalBackdrop"></div>
+  <div class="modal-panel glass">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+/* ===================== DATA ===================== */
+const PROVINCES = {
+  tehran: { id:"tehran", name:"تهران", region:"البرز مرکزی", top:35, left:54, blurb:"پایتخت ایران و آشپزخانه‌ای که ترکیبی از سنت‌های سراسر کشور را در خود جمع کرده است." },
+  gilan: { id:"gilan", name:"گیلان", region:"شمال، کنار دریای خزر", top:19, left:46, blurb:"سرزمین برنج و سبزیجات تازه، خاستگاه خورش‌های ترش و عطرآگین." },
+  mazandaran: { id:"mazandaran", name:"مازندران", region:"شمال، کنار دریای خزر", top:20, left:59, blurb:"جنگل‌های سرسبز و دریا، الهام‌بخش غذاهایی با ماهی، مرکبات و سبزی‌های محلی." },
+  "east-azerbaijan": { id:"east-azerbaijan", name:"آذربایجان شرقی", region:"شمال‌غرب", top:16, left:28, blurb:"تبریز، شهر کوفته‌های بزرگ و دلمه‌های خوش‌عطر، با میراثی غنی از آشپزی ترکی-ایرانی." },
+  kurdistan: { id:"kurdistan", name:"کردستان", region:"غرب", top:36, left:22, blurb:"کوهستان‌های زاگرس و سفره‌هایی سرشار از لبنیات محلی، گردو و نان‌های سنتی." },
+  khuzestan: { id:"khuzestan", name:"خوزستان", region:"جنوب‌غرب", top:62, left:27, blurb:"دیار نخل و خوزی‌های اصیل، با غذاهای تند و دریایی الهام‌گرفته از خلیج فارس." },
+  isfahan: { id:"isfahan", name:"اصفهان", region:"مرکز", top:53, left:49, blurb:"نصف جهان، شهری که هنر و آشپزی در آن با ظرافت به هم می‌رسند." },
+  fars: { id:"fars", name:"فارس", region:"جنوب مرکزی", top:70, left:51, blurb:"شیراز، شهر شعر و باغ‌های مرکبات، با عطر نارنج و گلاب در غذاهایش." },
+  qom: { id:"qom", name:"قم", region:"مرکز", top:46, left:54, blurb:"شهر زیارتی با شیرینی‌های سنتی معروف که در سفرهای ایرانی جایی ویژه دارند." },
+  yazd: { id:"yazd", name:"یزد", region:"کویر مرکزی", top:60, left:64, blurb:"شهر کویری با میراث زرتشتی، معروف به شیرینی‌های ظریف و خشکبار درجه یک." },
+  khorasan: { id:"khorasan", name:"خراسان رضوی", region:"شمال‌شرق", top:33, left:81, blurb:"مشهد، دیار زعفران و غذاهای گرم و مقوی برای زائران و مسافران." },
+  hormozgan: { id:"hormozgan", name:"هرمزگان", region:"جنوب، کنار خلیج فارس", top:86, left:60, blurb:"بندرعباس و سواحل جنوب، خاستگاه ادویه‌های تند و غذاهای دریایی رنگارنگ." }
+};
+
+const DISHES = [
+  { slug:"ghormeh-sabzi", name:"قورمه سبزی", shortName:"قورمه سبزی", category:"خورش", province:"gilan", city:"گیلان",
+    description:"خورشی پرعطر از سبزی‌های تازه تفت‌داده‌شده، لوبیا قرمز، لیمو عمانی و گوشت، که با چلوی سفید سرو می‌شود و یکی از محبوب‌ترین غذاهای خانگی ایران است.",
+    ingredients:["سبزی قورمه (جعفری، گشنیز، شنبلیله، تره)","گوشت گوسفندی یا گوساله","لوبیا قرمز","لیمو عمانی","پیاز","زردچوبه و فلفل سیاه"],
+    history:"قورمه سبزی ریشه در آشپزی خانگی شمال و مرکز ایران دارد و نامش از واژه «قورما» به معنای تفت‌دادن گرفته شده است. این خورش طی نسل‌ها در سفره‌های ایرانی جای ثابتی داشته و هر خانواده دستور پخت خاص خود را برای آن دارد.",
+    facts:["در نظرسنجی‌های بین‌المللی غذا، قورمه سبزی همواره در فهرست بهترین خورش‌های جهان قرار می‌گیرد.","شنبلیله تازه رازِ عطر منحصربه‌فرد این خورش است.","بسیاری از ایرانی‌ها آن را غذای نمادین مهمانی‌های خانگی می‌دانند."],
+    spiceLevel:1, prepTime:"۲ ساعت و ۳۰ دقیقه", accent:"pistachio", icon:"🌿", featured:true },
+  { slug:"chelo-kabab", name:"چلو کباب", shortName:"چلو کباب", category:"کباب", province:"tehran", city:"تهران",
+    description:"نماد ملی سفره ایرانی؛ ترکیبی از برنج ایرانی دم‌کرده و کباب کوبیده یا برگ، همراه با کره، گوجه کبابی و سماق.",
+    ingredients:["گوشت چرخ‌کرده یا فیله گوساله","برنج ایرانی","پیاز رنده‌شده","زعفران","کره","گوجه‌فرنگی برای کباب"],
+    history:"چلو کباب از دوران قاجار در تهران به یک رسم آشپزی تبدیل شد و رستوران‌های سنتی پایتخت آن را به‌عنوان غذای اصلی منوی خود برگزیدند. این غذا به‌سرعت از تهران به سراسر ایران و جهان راه یافت.",
+    facts:["چلو کباب اغلب نخستین غذایی است که گردشگران خارجی هنگام سفر به ایران امتحان می‌کنند.","کباب کوبیده باید با گوشت چرب کافی ورز داده شود تا از شاخ کباب جدا نشود.","دم‌کردن صحیح برنج با ته‌چین کره‌ای، هنر اصلی این غذا محسوب می‌شود."],
+    spiceLevel:1, prepTime:"۱ ساعت و ۴۵ دقیقه", accent:"saffron", icon:"🍢", featured:true },
+  { slug:"fesenjan", name:"فسنجان", shortName:"فسنجان", category:"خورش", province:"mazandaran", city:"گیلان و مازندران",
+    description:"خورشی مجلسی با طعم ترش‌وشیرین رب انار و گردوی تازه آسیاب‌شده، معمولاً با مرغ یا قرقاول و اغلب در مهمانی‌های ویژه سرو می‌شود.",
+    ingredients:["گردوی آسیاب‌شده","رب انار","مرغ یا قرقاول","پیاز","شکر یا دوشاب","زعفران به‌مقدار کم"],
+    history:"فسنجان از غذاهای کهن شمال ایران است که به دربارهای باستانی نیز راه یافته و در مهمانی‌های رسمی و آیینی به‌ویژه شب یلدا حضوری پررنگ دارد.",
+    facts:["ترکیب گردو و انار، نمادی از باروری و برکت در فرهنگ ایرانی به‌شمار می‌رود.","فسنجان اصیل باید آن‌قدر بپزد که روغن گردو روی خورش بنشیند.","در برخی نسخه‌های سنتی به‌جای مرغ از بلدرچین استفاده می‌شود."],
+    spiceLevel:1, prepTime:"۲ ساعت", accent:"pomegranate", icon:"🌰", featured:true },
+  { slug:"dizi", name:"دیزی (آبگوشت)", shortName:"آبگوشت", category:"آش و سوپ", province:"tehran", city:"تهران",
+    description:"خوراکی سنتی و مقوی از گوشت، نخود، لوبیا، سیب‌زمینی و گوجه که در دیزی سفالی پخته و به‌صورت آب و گوشت کوبیده با نان سرو می‌شود.",
+    ingredients:["گوشت گردن یا سردست گوسفندی","نخود و لوبیا چشم‌بلبلی","سیب‌زمینی","گوجه‌فرنگی","پیاز و سیر","لیمو عمانی"],
+    history:"آبگوشت یکی از قدیمی‌ترین غذاهای ایرانی است که ریشه در آشپزی روستایی و سفرهای کاروانی دارد؛ ظرف سفالی دیزی به آن طعمی خاص می‌دهد که تقلیدناپذیر است.",
+    facts:["رسم کوبیدن گوشت و نان در دیزی، آن را به تجربه‌ای اجتماعی و سرگرم‌کننده تبدیل کرده است.","در بسیاری از چایخانه‌های سنتی ایران، دیزی غذای اصلی منو است.","عصاره دیزی پیش از غذا به‌عنوان سوپ گرم نوشیده می‌شود."],
+    spiceLevel:1, prepTime:"۳ ساعت", accent:"saffron", icon:"🍲" },
+  { slug:"tahchin", name:"ته‌چین مرغ", shortName:"ته‌چین", category:"پلو و چلو", province:"fars", city:"شیراز",
+    description:"کیک برنجی زعفرانی با لایه‌های مرغ مزه‌دارشده در ماست و زعفران که با پوسته‌ای طلایی و ترد سرو می‌شود.",
+    ingredients:["برنج ایرانی","مرغ","ماست","زعفران","زرده تخم‌مرغ","کره"],
+    history:"ته‌چین از دل آشپزی مجلسی جنوب ایران سر برآورده و به‌مرور در سفره‌های شمالی نیز رسوخ کرده است؛ این غذا اغلب در مراسم‌های خاص و جمع‌های خانوادگی پخته می‌شود.",
+    facts:["راز ترد شدن پوسته ته‌چین در نسبت دقیق ماست، زعفران و روغن است.","ته‌چین را می‌توان با گوشت، مرغ، اسفناج یا حتی بدون گوشت تهیه کرد.","این غذا یکی از زیباترین غذاهای ایرانی از نظر ظاهر در سفره است."],
+    spiceLevel:1, prepTime:"۲ ساعت", accent:"saffron", icon:"🍚", featured:true },
+  { slug:"tabrizi-koofteh", name:"کوفته تبریزی", shortName:"کوفته تبریزی", category:"خورش", province:"east-azerbaijan", city:"تبریز",
+    description:"کوفته‌های بزرگ گوشتی با دل نواله‌ای از آلو، گردو، برنج و زرشک که در سسی غنی پخته می‌شوند؛ نمونه‌ای از مهارت بالای آشپزی تبریزی.",
+    ingredients:["گوشت چرخ‌کرده","برنج و نخود زرد","آلو، گردو و زرشک برای دل نواله","پیاز داغ","رب گوجه‌فرنگی","زردچوبه"],
+    history:"کوفته تبریزی یکی از شاخص‌ترین نمادهای آشپزی آذربایجانی است که اندازه بزرگ آن می‌تواند به ۲۰ سانتی‌متر هم برسد و ساخت آن مهارت و حوصله بالایی می‌خواهد.",
+    facts:["هر کوفته می‌تواند درون خود تخم‌مرغ آب‌پز کامل داشته باشد.","برش کوفته در وسط سفره، لحظه‌ای نمایشی برای میهمانان است.","در تبریز، کوفته تبریزی نماد مهمان‌نوازی و افتخار آشپزی خانگی است."],
+    spiceLevel:1, prepTime:"۲ ساعت و ۳۰ دقیقه", accent:"plum", icon:"🍖", featured:true },
+  { slug:"mirza-ghasemi", name:"میرزا قاسمی", shortName:"میرزا قاسمی", category:"پیش‌غذا و میان‌وعده", province:"gilan", city:"گیلان",
+    description:"خورشی گرم از بادمجان کبابی، گوجه‌فرنگی، سیر و تخم‌مرغ که با عطر دودی بادمجان، یکی از طعم‌های ماندگار آشپزی گیلان است.",
+    ingredients:["بادمجان","گوجه‌فرنگی","سیر فراوان","تخم‌مرغ","زردچوبه","رب گوجه‌فرنگی"],
+    history:"میرزا قاسمی از دل خانه‌های گیلانی بیرون آمده و نامش را به افتخار آشپزی خلاقانه روستایی گرفته است؛ این غذا اغلب به‌عنوان پیش‌غذا یا میان‌وعده سرو می‌شود.",
+    facts:["کبابی‌کردن بادمجان روی شعله مستقیم، رمز عطر اصیل این غذاست.","میرزا قاسمی را می‌توان با نان تازه یا به‌عنوان همراه چلو خورد.","سیر فراوان این غذا را به یک تقویت‌کننده طبیعی بدن نیز بدل کرده است."],
+    spiceLevel:1, prepTime:"۴۵ دقیقه", accent:"pomegranate", icon:"🍆" },
+  { slug:"baghali-polo", name:"باقالی پلو با گوشت", shortName:"باقالی پلو", category:"پلو و چلو", province:"tehran", city:"تهران",
+    description:"برنج معطر با باقالی سبز تازه و شوید، همراه با ماهیچه یا گردن گوسفندی که در مراسم و مهمانی‌های ایرانی محبوبیت زیادی دارد.",
+    ingredients:["برنج ایرانی","باقالی سبز","شوید تازه","ماهیچه گوسفندی","زعفران","دارچین"],
+    history:"باقالی پلو از غذاهای کهن مرکز ایران است که با ورود باقالی تازه در فصل بهار به بازارها، در سفره‌های خانگی و رستوران‌ها رونق می‌گیرد.",
+    facts:["نسخه‌های شمالی این غذا گاهی با ماهی نیز سرو می‌شوند.","عطر شوید تازه، شناسه اصلی این پلو محسوب می‌شود.","باقالی پلو با ماهیچه از غذاهای رایج مجالس عروسی ایرانی است."],
+    spiceLevel:1, prepTime:"۲ ساعت", accent:"pistachio", icon:"🫘" },
+  { slug:"zereshk-polo", name:"زرشک پلو با مرغ", shortName:"زرشک پلو", category:"پلو و چلو", province:"tehran", city:"تهران",
+    description:"برنج زعفرانی همراه با زرشک ترش و شیرین‌شده با شکر و مرغ کبابی یا تفت‌داده، یکی از پرطرفدارترین پلوهای ایرانی برای مهمانی‌ها.",
+    ingredients:["برنج ایرانی","زرشک","مرغ","زعفران","پسته و بادام خلال","شکر"],
+    history:"زرشک پلو با مرغ از دیرباز در سفره‌های جشن و عروسی ایرانیان حضور داشته و رنگ قرمز زرشک در کنار زرد زعفران، ترکیبی بصری نمادین برای جشن‌ها ساخته است.",
+    facts:["زرشک شمال خراسان باکیفیت‌ترین نوع زرشک ایران شناخته می‌شود.","این غذا یکی از پرتکرارترین پلوهای رستوران‌های ایرانی در سراسر جهان است.","اضافه‌کردن کمی شکر به زرشک سرخ‌شده، تعادل ترش‌وشیرین دلپذیری ایجاد می‌کند."],
+    spiceLevel:1, prepTime:"۱ ساعت و ۳۰ دقیقه", accent:"pomegranate", icon:"🍗", featured:true },
+  { slug:"kashk-e-bademjan", name:"کشک بادمجان", shortName:"کشک بادمجان", category:"پیش‌غذا و میان‌وعده", province:"isfahan", city:"اصفهان",
+    description:"پوره‌ای کِرمی از بادمجان سرخ‌شده و کشک، تزیین‌شده با پیازداغ و نعنا داغ، از پیش‌غذاهای کلاسیک سفره ایرانی.",
+    ingredients:["بادمجان","کشک","پیاز داغ","نعنا خشک","گردو","سیر"],
+    history:"کشک بادمجان از غذاهای روستایی فلات مرکزی ایران است که استفاده از کشک، فرآورده سنتی لبنی، آن را به نمادی از آشپزی پایدار و خانگی ایرانی تبدیل کرده است.",
+    facts:["کشک سنتی از دوغ خشک‌شده و نمک‌زده تهیه می‌شود و عطر ترش خاصی دارد.","نعنا داغ روی این غذا رازِ خوش‌عطر بودن آن است.","کشک بادمجان معمولاً با نان تازه و به‌عنوان پیش‌غذا میل می‌شود."],
+    spiceLevel:1, prepTime:"۱ ساعت", accent:"plum", icon:"🍆" },
+  { slug:"ash-reshteh", name:"آش رشته", shortName:"آش رشته", category:"آش و سوپ", province:"qom", city:"سراسر ایران",
+    description:"آشی غلیظ از رشته، سبزی‌های معطر، لوبیا و عدس که با کشک، پیازداغ و نعنا داغ تزیین می‌شود؛ نماد نذری و گرمابخش زمستان‌های ایرانی.",
+    ingredients:["رشته آشی","سبزی آش (اسفناج، گشنیز، تره)","لوبیا قرمز و چیتی","عدس","کشک","پیاز داغ"],
+    history:"آش رشته یکی از قدیمی‌ترین غذاهای نذری ایران است و باور عامیانه می‌گوید رشته‌های آن نمادی از گشوده‌شدن گره‌های زندگی هستند.",
+    facts:["آش رشته در بسیاری از مناسبت‌های نذری مانند چهارشنبه آخر سال پخته می‌شود.","هرچه آش غلیظ‌تر باشد، نشانه دل‌وجان بیشتر آشپز به مهمانانش است، طبق باور عامه.","نسخه‌های گیاهی و گوشتی آش رشته هر دو در مناطق مختلف رایج‌اند."],
+    spiceLevel:1, prepTime:"۲ ساعت", accent:"pistachio", icon:"🍜", featured:true },
+  { slug:"halim", name:"حلیم", shortName:"حلیم", category:"آش و سوپ", province:"khorasan", city:"مشهد",
+    description:"غذای صبحانه‌ای گرم و پرانرژی از گندم یا جو له‌شده و گوشت که ساعت‌ها پخته می‌شود تا بافتی نرم و یکدست پیدا کند.",
+    ingredients:["گندم له‌شده","گوشت گوساله یا بوقلمون","دارچین","شکر","کره","نمک"],
+    history:"حلیم مشهد یکی از مشهورترین صبحانه‌های سنتی خاورمیانه است که با ورود زائران به این شهر زیارتی شهرتی فراگیر یافته است.",
+    facts:["هم‌زدن طولانی حلیم با چنگال مخصوص، رمز یکدستی بافت آن است.","حلیم بوقلمون نسخه سبک‌تر و امروزی‌تر این غذای سنتی است.","در بامداد سرد مشهد، صف حلیم‌فروشی‌ها از تصاویر آشنای شهر است."],
+    spiceLevel:1, prepTime:"۵ ساعت", accent:"saffron", icon:"🥣" },
+  { slug:"dolmeh", name:"دلمه برگ مو", shortName:"دلمه برگ مو", category:"پیش‌غذا و میان‌وعده", province:"east-azerbaijan", city:"تبریز",
+    description:"برگ‌های موی پرشده با مخلوط برنج، نخود، عدس و سبزی‌های معطر که به‌آرامی پخته و با طعمی ترش‌وشیرین سرو می‌شود.",
+    ingredients:["برگ مو","برنج","نخود و عدس","سبزی معطر","آلو و آب‌غوره","زردچوبه"],
+    history:"دلمه‌پیچی در آشپزی آذربایجانی هنری چندنسلی است که از مادر به دختر منتقل می‌شود و در مهمانی‌های خانوادگی به‌عنوان نشانه مهارت آشپز شناخته می‌شود.",
+    facts:["دلمه برگ مو در فصل بهار با برگ‌های تازه مو طعمی خاص پیدا می‌کند.","نسخه‌های گوشتی و گیاهی این غذا هر دو در سراسر ایران رایج‌اند.","پیچیدن دلمه باریک و یکدست، نشانه تبحر آشپز محسوب می‌شود."],
+    spiceLevel:1, prepTime:"۲ ساعت", accent:"pistachio", icon:"🍇" },
+  { slug:"kalam-polo", name:"کلم پلو شیرازی", shortName:"کلم پلو", category:"پلو و چلو", province:"fars", city:"شیراز",
+    description:"پلویی خوش‌عطر از کلم، شوید، گوشت چرخ‌کرده و کوفته‌های ریز، که با ادویه مخصوص شیرازی طعمی منحصربه‌فرد پیدا می‌کند.",
+    ingredients:["برنج ایرانی","کلم سبز","شوید","گوشت چرخ‌کرده","ادویه شیرازی","پیاز"],
+    history:"کلم پلو از غذاهای اصیل شیراز است که ترکیب کلم و شوید را به شکلی هماهنگ با گوشت و ادویه‌های محلی به‌کار می‌گیرد و در سفره‌های فارسی محبوبیت دیرینه دارد.",
+    facts:["نسخه شیرازی این غذا با کوفته‌های ریز سرخ‌شده تکمیل می‌شود.","ادویه مخصوص شیرازی، رازِ عطر متفاوت این پلو نسبت به سایر پلوهای ایرانی است.","کلم پلو در فصل سرما از پرطرفدارترین غذاهای خانگی شیراز است."],
+    spiceLevel:2, prepTime:"۱ ساعت و ۴۵ دقیقه", accent:"pistachio", icon:"🥬" },
+  { slug:"shishlik", name:"شیشلیک", shortName:"شیشلیک", category:"کباب", province:"east-azerbaijan", city:"تبریز",
+    description:"کباب دنده و فیله گوسفندی مزه‌دارشده با پیاز و آبلیمو که روی ذغال کبابی می‌شود و طعمی غنی و آبدار دارد.",
+    ingredients:["دنده و فیله گوسفندی","پیاز","آبلیمو","نمک و فلفل","زعفران","کره"],
+    history:"شیشلیک ریشه در آشپزی ترکی-آذربایجانی دارد و در تبریز به یکی از کباب‌های مجلسی و باکیفیت تبدیل شده که معمولاً با گوشت درجه یک تهیه می‌شود.",
+    facts:["بهترین شیشلیک از گوشت بره‌های تازه و چرب تهیه می‌شود.","زمان مرینیت گوشت در آبلیمو و پیاز برای طعم نهایی بسیار مهم است.","شیشلیک اغلب با نان تازه و گوجه کبابی سرو می‌شود."],
+    spiceLevel:1, prepTime:"۱ ساعت", accent:"pomegranate", icon:"🍖" },
+  { slug:"ghalieh-mahi", name:"قلیه ماهی", shortName:"قلیه ماهی", category:"خورش", province:"khuzestan", city:"خوزستان",
+    description:"خورش تند و عطرآگین از ماهی، سبزی‌های جنوبی و تمر هندی که با برنج سرو می‌شود و نمادی از آشپزی دریایی جنوب ایران است.",
+    ingredients:["ماهی (شیر یا سرخو)","سبزی قلیه (گشنیز، شنبلیله)","تمر هندی","سیر","فلفل قرمز و زردچوبه","روغن نباتی"],
+    history:"قلیه ماهی از غذاهای ریشه‌دار خوزستان و سواحل خلیج فارس است که با تأثیرپذیری از آشپزی عربی-خوزی، طعمی تند و ترش پیدا کرده است.",
+    facts:["تمر هندی، ترشی خاص این خورش جنوبی را می‌سازد.","قلیه ماهی در شهرهای ساحلی خوزستان و بوشهر با تنوع زیادی پخته می‌شود.","این غذا معمولاً با ماهی‌های تازه رودخانه کارون تهیه می‌شود."],
+    spiceLevel:3, prepTime:"۱ ساعت و ۱۵ دقیقه", accent:"pomegranate", icon:"🐟" },
+  { slug:"sambouseh", name:"سمبوسه", shortName:"سمبوسه", category:"پیش‌غذا و میان‌وعده", province:"hormozgan", city:"بندرعباس",
+    description:"خمیرهای مثلثی ترد و سرخ‌شده با مغز گوشت و سبزی‌های معطر جنوبی، یکی از پرطرفدارترین تنقلات سواحل خلیج فارس.",
+    ingredients:["خمیر سمبوسه","گوشت چرخ‌کرده یا مرغ","پیاز","ادویه جنوبی","سیب‌زمینی","روغن برای سرخ‌کردن"],
+    history:"سمبوسه از طریق تجارت دریایی میان سواحل جنوب ایران و کشورهای حاشیه خلیج فارس و شبه‌قاره هند وارد آشپزی بندری شده و به‌سرعت محبوبیت یافته است.",
+    facts:["سمبوسه در ماه رمضان یکی از پرتقاضاترین غذاهای افطاری سواحل جنوب است.","ادویه‌های تند جنوبی مانند زردچوبه و فلفل، طعم اصلی مغز سمبوسه را می‌سازند.","نسخه‌های دریایی سمبوسه با میگو نیز در بندرعباس رایج است."],
+    spiceLevel:2, prepTime:"۱ ساعت", accent:"saffron", icon:"🥟" },
+  { slug:"baghali-ghatogh", name:"باقالی قاتق", shortName:"باقالی قاتق", category:"خورش", province:"gilan", city:"گیلان",
+    description:"خورشی ساده و خوش‌عطر از باقالی، شوید و سیر تازه که با تخم‌مرغ یا ماهی سرو می‌شود و از غذاهای اصیل خانگی گیلان است.",
+    ingredients:["باقالی سبز","شوید تازه","سیر فراوان","تخم‌مرغ یا ماهی","زردچوبه","نمک"],
+    history:"باقالی قاتق از غذاهای روستایی گیلان است که سادگی مواد اولیه آن، فلسفه آشپزی شمال ایران یعنی استفاده از محصولات تازه و محلی را به نمایش می‌گذارد.",
+    facts:["این غذا اغلب صبحانه یا شام سبک خانه‌های گیلانی است.","سیر تازه فراوان، طعم تند و خاص این خورش را می‌سازد.","باقالی قاتق با نان محلی گیلان بهترین همراهی را دارد."],
+    spiceLevel:1, prepTime:"۵۰ دقیقه", accent:"pistachio", icon:"🌱" },
+  { slug:"ash-doogh", name:"آش دوغ", shortName:"آش دوغ", category:"آش و سوپ", province:"east-azerbaijan", city:"تبریز",
+    description:"آشی خنک و ترش بر پایه دوغ و سبزی‌های معطر مانند گشنیز و شوید، که در تابستان‌های گرم آذربایجان طراوتی خاص می‌بخشد.",
+    ingredients:["دوغ","برنج","گشنیز و شوید","نخود","نعنا خشک","سیر"],
+    history:"آش دوغ از آشپزی سنتی آذربایجان است که برخلاف بسیاری از آش‌های گرم ایرانی، به‌صورت خنک یا ولرم سرو می‌شود و برای فصل گرما طراحی شده است.",
+    facts:["آش دوغ یکی از کم‌نظیرترین آش‌های خنک در آشپزی ایرانی است.","ترکیب دوغ و سبزی تازه، آن را غذایی سبک و تابستانی می‌کند.","در برخی روستاهای آذربایجان، آش دوغ با گوشت چرخ‌کرده نیز تهیه می‌شود."],
+    spiceLevel:1, prepTime:"۱ ساعت", accent:"turquoise", icon:"🥛" },
+  { slug:"sholeh-zard", name:"شله زرد", shortName:"شله زرد", category:"دسر و شیرینی", province:"isfahan", city:"سراسر ایران",
+    description:"دسری لطیف از برنج، زعفران، شکر و گلاب که با خلال پسته، بادام و دارچین تزیین می‌شود؛ غذای نذری محبوب ایرانیان.",
+    ingredients:["برنج","زعفران","شکر","گلاب","پسته و بادام خلالی","دارچین"],
+    history:"شله زرد یکی از کهن‌ترین دسرهای ایرانی است که ریشه در آشپزی دوران باستان دارد و امروز بیشتر به‌عنوان نذری در مناسبت‌های مذهبی و خانوادگی پخته می‌شود.",
+    facts:["طرح‌های هندسی روی سطح شله زرد با دارچین و پسته، خود نوعی هنر سفره‌آرایی است.","عطر گلاب و زعفران، این دسر را در میان شیرینی‌های ایرانی متمایز می‌کند.","شله زرد در مراسم نذری معمولاً میان همسایگان و آشنایان تقسیم می‌شود."],
+    spiceLevel:1, prepTime:"۱ ساعت و ۱۵ دقیقه", accent:"saffron", icon:"🍮", featured:true },
+  { slug:"bastani-sonnati", name:"بستنی سنتی زعفرانی", shortName:"بستنی سنتی", category:"دسر و شیرینی", province:"isfahan", city:"اصفهان",
+    description:"بستنی خوش‌بافت با عطر زعفران و گلاب، تکه‌های خامه و خلال پسته که از دیرباز در قنادی‌های سنتی ایران دستی تهیه می‌شود.",
+    ingredients:["شیر و خامه","زعفران","گلاب","تکه‌های خامه یخ‌زده","خلال پسته","شکر"],
+    history:"بستنی سنتی ایرانی یکی از قدیمی‌ترین انواع بستنی در جهان است که پیش از فراگیر شدن یخچال، با استفاده از یخ طبیعی کوهستان‌ها و چاه‌های یخ تهیه می‌شد.",
+    facts:["تکه‌های خامه یخ‌زده درون بستنی، یکی از نشانه‌های اصالت بستنی سنتی است.","زعفران و گلاب رنگ و عطر منحصربه‌فرد این بستنی را شکل می‌دهند.","اصفهان یکی از مشهورترین شهرهای ایران برای بستنی سنتی است."],
+    spiceLevel:1, prepTime:"۲ ساعت (به‌همراه یخ‌زدن)", accent:"saffron", icon:"🍦" },
+  { slug:"zoolbia-bamieh", name:"زولبیا و بامیه", shortName:"زولبیا بامیه", category:"دسر و شیرینی", province:"yazd", city:"یزد",
+    description:"شیرینی‌های ترد و شربتی که در ماه رمضان به‌فراوانی تهیه می‌شوند؛ زولبیا حلقه‌ای و ترد و بامیه نرم و اسفنجی است.",
+    ingredients:["آرد گندم و نشاسته","ماست","زعفران","شربت شکر و گلاب","روغن برای سرخ‌کردن","هل"],
+    history:"زولبیا و بامیه شیرینی‌های آشنای ماه رمضان در سراسر ایران هستند و قنادی‌های یزد به‌دلیل کیفیت بالای این دو شیرینی، شهرت ویژه‌ای دارند.",
+    facts:["غوطه‌ور کردن سریع این شیرینی‌ها در شربت گرم، رازِ تردی آن‌هاست.","یزد به‌عنوان یکی از پایتخت‌های شیرینی سنتی ایران شناخته می‌شود.","زولبیا و بامیه معمولاً در کنار هم و در یک ظرف سرو می‌شوند."],
+    spiceLevel:1, prepTime:"۱ ساعت و ۳۰ دقیقه", accent:"saffron", icon:"🍩" },
+  { slug:"gaz", name:"گز اصفهان", shortName:"گز", category:"دسر و شیرینی", province:"isfahan", city:"اصفهان",
+    description:"شیرینی سفید و نرم بر پایه شیره گزانگبین، سفیده تخم‌مرغ و مغزهای پسته یا بادام، از سوغات‌های اصیل و معروف اصفهان.",
+    ingredients:["شیره گزانگبین","سفیده تخم‌مرغ","پسته یا بادام","شکر","گلاب","نشاسته"],
+    history:"گز از شیره درختچه‌های گز در منطقه اصفهان گرفته می‌شود و قدمتی چندصدساله در صنعت قنادی این شهر دارد؛ امروز یکی از معروف‌ترین سوغات‌های ایران است.",
+    facts:["تهیه گز اصیل نیازمند هم‌زدن طولانی و دقیق است تا بافت اسفنجی به‌دست آید.","گزانگبین، ماده اصلی گز، از شاخ‌وبرگ بوته‌های گز در فصل تابستان گرفته می‌شود.","گز پسته‌ای اصفهان یکی از پرفروش‌ترین سوغات‌های ایران در میان گردشگران است."],
+    spiceLevel:1, prepTime:"۱ ساعت", accent:"pistachio", icon:"🍬" },
+  { slug:"sohan", name:"سوهان قم", shortName:"سوهان", category:"دسر و شیرینی", province:"qom", city:"قم",
+    description:"شیرینی کاراملی و ترد با خلال پسته و زعفران که به‌صورت دستی کشیده و پخته می‌شود؛ نمادی از سوغات شهر قم.",
+    ingredients:["شیره قند یا شکر","آرد گندم جوانه‌زده","روغن کرمانشاهی","زعفران","پسته و خلال بادام","هل"],
+    history:"سوهان قم بیش از یک قرن قدمت دارد و فرآیند تهیه آن که نیازمند کشش و چرخش پیوسته خمیر داغ روی حرارت است، آن را به یکی از هنرهای قنادی ایران تبدیل کرده است.",
+    facts:["تهیه سوهان اصیل باید زیر نظر استادکارانی انجام شود که سال‌ها تجربه دارند.","سوهان قم در بسته‌بندی‌های فلزی رنگی، یکی از شناخته‌شده‌ترین سوغات‌های ایران است.","زعفران و پسته، طعم و رنگ ویژه سوهان اصیل قم را می‌سازند."],
+    spiceLevel:1, prepTime:"۴۵ دقیقه", accent:"saffron", icon:"🟡" }
+];
+
+const CATEGORY_ICONS = { "خورش":"🍲", "پلو و چلو":"🍚", "آش و سوپ":"🥣", "کباب":"🍢", "دسر و شیرینی":"🍮", "پیش‌غذا و میان‌وعده":"🥟" };
+const CATEGORIES = [...new Set(DISHES.map(d => d.category))];
+const CAT_GRADIENTS = ["acc-saffron","acc-turquoise","acc-plum","acc-pistachio","acc-pomegranate","acc-saffron"];
+const SPICE_EMOJI = "🌶️";
+
+/* ===================== HELPERS ===================== */
+function dishVisualHtml(dish, big) {
+  const size = big ? "5rem" : "3rem";
+  return `<span class="ico" style="font-size:${size}" role="img" aria-label="${dish.name}">${dish.icon}</span><div class="fade"></div>`;
+}
+
+function dishCardHtml(dish) {
+  return `
+  <div class="dish-card reveal" data-slug="${dish.slug}" onclick="openDish('${dish.slug}')">
+    <div class="dish-visual acc-${dish.accent}">
+      <span class="cat-tag">${dish.category}</span>
+      ${dishVisualHtml(dish, false)}
+    </div>
+    <div class="dish-body">
+      <div class="row">
+        <h3>${dish.name}</h3>
+        <span class="tag-province">${PROVINCES[dish.province].name}</span>
+      </div>
+      <p class="desc">${dish.description}</p>
+      <div class="dish-meta">
+        <span>⏱ ${dish.prepTime}</span>
+        <span class="dot"></span>
+        <span>${dish.city}</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ===================== RENDER: HERO TILES ===================== */
+function renderHeroTiles() {
+  const featured = DISHES.filter(d => d.featured).slice(0, 4);
+  const el = document.getElementById("heroTiles");
+  el.innerHTML = featured.map((d, i) => `
+    <div class="hero-tile glass shadow-warm ${i % 2 === 0 ? "float-slow" : "float-slower"}">
+      <span class="ico">${d.icon}</span>
+      <span class="nm">${d.shortName}</span>
+      <span class="ct">${d.city}</span>
+    </div>`).join("");
+  document.getElementById("statDishCount").textContent = "+" + DISHES.length;
+}
+
+/* ===================== RENDER: FEATURED ===================== */
+function renderFeatured() {
+  const featured = DISHES.filter(d => d.featured);
+  document.getElementById("featuredGrid").innerHTML = featured.map(dishCardHtml).join("");
+}
+
+/* ===================== RENDER: CATEGORIES ===================== */
+function renderCategories() {
+  const el = document.getElementById("categoryGrid");
+  el.innerHTML = CATEGORIES.map((cat, i) => {
+    const count = DISHES.filter(d => d.category === cat).length;
+    return `
+    <div class="cat-card reveal ${CAT_GRADIENTS[i % CAT_GRADIENTS.length]}" style="background-image:linear-gradient(135deg, var(--bg-soft), var(--surface));" onclick="goToExplore(null,'${cat}')">
+      <span class="cat-icon">${CATEGORY_ICONS[cat] || "🍽"}</span>
+      <div>
+        <h3>${cat}</h3>
+        <p>${count} غذای ثبت‌شده</p>
+      </div>
+      <span class="cat-arrow">←</span>
+    </div>`;
+  }).join("");
+}
+
+/* ===================== RENDER: MAP ===================== */
+let activeProvince = "tehran";
+
+function renderMapDots() {
+  const g = document.getElementById("mapDots");
+  g.innerHTML = Object.values(PROVINCES).map(p => `
+    <g class="map-dot" data-province="${p.id}" onclick="setActiveProvince('${p.id}')">
+      <circle cx="${p.left}" cy="${p.top}" r="2.2" fill="var(--saffron)" class="dot-circle"></circle>
+      <text x="${p.left}" y="${p.top - 4}" text-anchor="middle" font-size="2.6" fill="var(--ink)" class="dot-label" style="pointer-events:none;">${p.name}</text>
+    </g>`).join("");
+}
+
+function renderProvinceButtons() {
+  const el = document.getElementById("provinceButtons");
+  el.innerHTML = Object.values(PROVINCES).map(p => `
+    <button class="province-btn" data-province="${p.id}" onclick="setActiveProvince('${p.id}')">${p.name}</button>`).join("");
+  document.getElementById("footerProvinces").innerHTML = Object.values(PROVINCES).slice(0, 5).map(p =>
+    `<li><a href="#explore" onclick="goToExplore('${p.id}', null)">${p.name}</a></li>`).join("");
+}
+
+function setActiveProvince(id) {
+  activeProvince = id;
+  document.querySelectorAll(".map-dot circle").forEach(c => {
+    const isActive = c.parentNode.getAttribute("data-province") === id;
+    c.setAttribute("r", isActive ? "3.4" : "2.2");
+    c.setAttribute("fill", isActive ? "var(--pomegranate)" : "var(--saffron)");
+  });
+  document.querySelectorAll(".map-dot text").forEach(t => {
+    t.style.opacity = t.parentNode.getAttribute("data-province") === id ? "1" : ".55";
+  });
+  document.querySelectorAll(".province-btn").forEach(b => {
+    b.classList.toggle("active", b.getAttribute("data-province") === id);
+  });
+  renderMapInfo();
+}
+
+function renderMapInfo() {
+  const p = PROVINCES[activeProvince];
+  const dishesInProvince = DISHES.filter(d => d.province === activeProvince);
+  const el = document.getElementById("mapInfo");
+  el.innerHTML = `
+    <span class="region-tag">${p.region}</span>
+    <h3>${p.name}</h3>
+    <p class="blurb">${p.blurb}</p>
+    <span class="count-pill">${dishesInProvince.length} غذای ثبت‌شده</span>
+    <div class="map-dish-chips">
+      ${dishesInProvince.map(d => `<span class="map-dish-chip" onclick="openDish('${d.slug}')">${d.icon} ${d.shortName}</span>`).join("") || `<p style="font-size:.8rem;color:var(--ink-soft);">به‌زودی غذاهای این منطقه افزوده می‌شود.</p>`}
+    </div>
+    <span class="view-all" onclick="goToExplore('${activeProvince}', null)">مشاهده همه غذاهای ${p.name} ←</span>
+  `;
+}
+
+/* ===================== EXPLORE / FILTERS ===================== */
+function renderFilterOptions() {
+  const catSel = document.getElementById("categoryFilter");
+  CATEGORIES.forEach(c => {
+    const o = document.createElement("option");
+    o.value = c; o.textContent = c;
+    catSel.appendChild(o);
+  });
+  const provSel = document.getElementById("provinceFilter");
+  Object.values(PROVINCES).forEach(p => {
+    const o = document.createElement("option");
+    o.value = p.id; o.textContent = p.name;
+    provSel.appendChild(o);
+  });
+}
+
+function applyFilters() {
+  const q = document.getElementById("searchInput").value.trim().toLowerCase();
+  const cat = document.getElementById("categoryFilter").value;
+  const prov = document.getElementById("provinceFilter").value;
+
+  const filtered = DISHES.filter(d => {
+    const matchesQuery = !q ||
+      d.name.toLowerCase().includes(q) ||
+      d.description.toLowerCase().includes(q) ||
+      d.ingredients.some(ing => ing.toLowerCase().includes(q)) ||
+      d.city.toLowerCase().includes(q);
+    const matchesCat = cat === "all" || d.category === cat;
+    const matchesProv = prov === "all" || d.province === prov;
+    return matchesQuery && matchesCat && matchesProv;
+  });
+
+  document.getElementById("resultsCount").textContent = filtered.length + " غذا پیدا شد";
+  const grid = document.getElementById("exploreGrid");
+  const empty = document.getElementById("emptyState");
+  if (filtered.length > 0) {
+    grid.style.display = "grid";
+    empty.style.display = "none";
+    grid.innerHTML = filtered.map(dishCardHtml).join("");
+    requestAnimationFrame(() => observeReveals());
+  } else {
+    grid.style.display = "none";
+    empty.style.display = "block";
+  }
+
+  document.getElementById("clearFilters").style.display = (cat !== "all" || prov !== "all" || q) ? "inline-flex" : "none";
+}
+
+function clearAllFilters() {
+  document.getElementById("searchInput").value = "";
+  document.getElementById("categoryFilter").value = "all";
+  document.getElementById("provinceFilter").value = "all";
+  applyFilters();
+}
+
+function goToExplore(provinceId, categoryName) {
+  document.getElementById("provinceFilter").value = provinceId || "all";
+  document.getElementById("categoryFilter").value = categoryName || "all";
+  applyFilters();
+  document.getElementById("explore").scrollIntoView({ behavior: "smooth" });
+}
+
+/* ===================== MODAL ===================== */
+function openDish(slug) {
+  const dish = DISHES.find(d => d.slug === slug);
+  if (!dish) return;
+  const province = PROVINCES[dish.province];
+  const related = DISHES.filter(d => d.slug !== dish.slug && d.province === dish.province).slice(0, 3);
+
+  document.getElementById("modalContent").innerHTML = `
+    <div class="modal-hero acc-${dish.accent}">
+      ${dishVisualHtml(dish, true)}
+      <div class="overlay-text">
+        <span class="pill">${dish.category}</span>
+        <h1>${dish.name}</h1>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div>
+        <div class="modal-section">
+          <h2>معرفی</h2>
+          <p>${dish.description}</p>
+        </div>
+        <div class="modal-section" style="margin-top:2rem;">
+          <h2>تاریخچه و پیشینه فرهنگی</h2>
+          <p>${dish.history}</p>
+        </div>
+        <div class="modal-section" style="margin-top:2rem;">
+          <h2>نکات خواندنی</h2>
+          <ul class="facts-list">
+            ${dish.facts.map(f => `<li><span>✨</span>${f}</li>`).join("")}
+          </ul>
+        </div>
+      </div>
+      <div class="modal-side">
+        <div class="side-card">
+          <h3>اطلاعات کلی</h3>
+          <div class="info-row"><span class="lbl">استان/منطقه</span><span class="val">${province.name} (${dish.city})</span></div>
+          <div class="info-row"><span class="lbl">زمان آماده‌سازی</span><span class="val">${dish.prepTime}</span></div>
+          <div class="info-row"><span class="lbl">سطح تندی</span><span class="val">${SPICE_EMOJI.repeat(dish.spiceLevel) || "بدون تندی"}</span></div>
+          <div class="info-row"><span class="lbl">دسته‌بندی</span><span class="val">${dish.category}</span></div>
+        </div>
+        <div class="side-card">
+          <h3>مواد اولیه اصلی</h3>
+          <div class="ingredients-wrap">
+            ${dish.ingredients.map(ing => `<span class="ingredient-chip">${ing}</span>`).join("")}
+          </div>
+        </div>
+        <a class="btn btn-primary" style="display:block;text-align:center;" onclick="goToExploreFromModal('${dish.province}')">مشاهده همه غذاهای ${province.name} ←</a>
+      </div>
+    </div>
+    ${related.length ? `
+    <div class="related-section">
+      <h2>سایر غذاهای ${province.name}</h2>
+      <div class="related-grid">
+        ${related.map(dishCardHtml).join("")}
+      </div>
+    </div>` : ""}
+  `;
+  document.getElementById("dishModal").classList.add("open");
+  document.body.style.overflow = "hidden";
+  location.hash = "dish-" + slug;
+}
+
+function goToExploreFromModal(provinceId) {
+  closeModal();
+  goToExplore(provinceId, null);
+}
+
+function closeModal() {
+  document.getElementById("dishModal").classList.remove("open");
+  document.body.style.overflow = "";
+  if (location.hash.startsWith("#dish-")) {
+    history.replaceState(null, "", location.pathname + location.search + "#explore");
+  }
+}
+
+/* ===================== THEME ===================== */
+function initTheme() {
+  const btn = document.getElementById("themeToggle");
+  const isDark = document.documentElement.classList.contains("dark");
+  btn.textContent = isDark ? "🌙" : "☀️";
+  btn.addEventListener("click", () => {
+    const nowDark = document.documentElement.classList.toggle("dark");
+    localStorage.setItem("iranfood-theme", nowDark ? "dark" : "light");
+    btn.textContent = nowDark ? "🌙" : "☀️";
+  });
+}
+
+/* ===================== NAV / SCROLL ===================== */
+function initNav() {
+  const header = document.getElementById("nav");
+  window.addEventListener("scroll", () => {
+    header.classList.toggle("scrolled", window.scrollY > 12);
+  });
+  const mobileToggle = document.getElementById("mobileToggle");
+  const mobileMenu = document.getElementById("mobileMenu");
+  mobileMenu.style.display = "none";
+  mobileToggle.addEventListener("click", () => {
+    const open = mobileMenu.style.display === "flex";
+    mobileMenu.style.display = open ? "none" : "flex";
+    mobileToggle.textContent = open ? "☰" : "✕";
+  });
+  mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    mobileMenu.style.display = "none";
+    mobileToggle.textContent = "☰";
+  }));
+}
+
+/* ===================== REVEAL ON SCROLL ===================== */
+let revealObserver;
+function observeReveals() {
+  document.querySelectorAll(".reveal:not(.in)").forEach(el => revealObserver.observe(el));
+}
+function initReveal() {
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("in");
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  observeReveals();
+}
+
+/* ===================== INIT ===================== */
+function init() {
+  renderHeroTiles();
+  renderFeatured();
+  renderCategories();
+  renderMapDots();
+  renderProvinceButtons();
+  setActiveProvince("tehran");
+  renderFilterOptions();
+  applyFilters();
+  initTheme();
+  initNav();
+  initReveal();
+
+  document.getElementById("searchInput").addEventListener("input", applyFilters);
+  document.getElementById("categoryFilter").addEventListener("change", applyFilters);
+  document.getElementById("provinceFilter").addEventListener("change", applyFilters);
+  document.getElementById("clearFilters").addEventListener("click", clearAllFilters);
+  document.getElementById("modalClose").addEventListener("click", closeModal);
+  document.getElementById("modalBackdrop").addEventListener("click", closeModal);
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeModal(); });
+
+  if (location.hash.startsWith("#dish-")) {
+    const slug = location.hash.replace("#dish-", "");
+    if (DISHES.some(d => d.slug === slug)) openDish(slug);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
