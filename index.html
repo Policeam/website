@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0f0a07" />
+
+  <title>دانشنامهٔ خوراک ایرانی | سفری به دنیای طعم‌ها و فرهنگ آشپزی ایران</title>
+  <meta name="description" content="دانشنامهٔ جامع آشپزی ایرانی؛ معرفی غذاهای سنتی ایران به‌همراه تاریخچه، مواد اولیه، خاستگاه، اهمیت فرهنگی و نکات جالب. کاوش غذاها بر اساس استان روی نقشهٔ تعاملی ایران." />
+  <meta name="keywords" content="آشپزی ایرانی, غذای ایرانی, غذاهای سنتی ایران, قورمه سبزی, چلوکباب, فسنجان, دانشنامه آشپزی, خوراک ایرانی, نقشه غذای ایران" />
+  <meta name="author" content="دانشنامهٔ خوراک ایرانی" />
+  <link rel="canonical" href="https://example.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fa_IR" />
+  <meta property="og:title" content="دانشنامهٔ خوراک ایرانی" />
+  <meta property="og:description" content="سفری تصویری به دنیای طعم‌ها و فرهنگ آشپزی ایران؛ کاوش غذاهای اصیل ایرانی بر اساس استان و دسته‌بندی." />
+  <meta property="og:site_name" content="دانشنامهٔ خوراک ایرانی" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍲%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+
+  <!-- داده‌های ساختاریافته برای موتورهای جستجو -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "دانشنامهٔ خوراک ایرانی",
+    "inLanguage": "fa-IR",
+    "description": "دانشنامهٔ جامع آشپزی سنتی ایران شامل تاریخچه، مواد اولیه و خاستگاه غذاها."
+  }
+  </script>
+</head>
+<body data-theme="dark">
+
+  <!-- نوار پیشرفت پیمایش -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ============ سربرگ / ناوبری ============ -->
+  <header class="site-header" id="siteHeader">
+    <nav class="nav container" aria-label="ناوبری اصلی">
+      <a href="#hero" class="brand" aria-label="خانه">
+        <span class="brand__icon">🍲</span>
+        <span class="brand__text">دانشنامهٔ <b>خوراک ایرانی</b></span>
+      </a>
+
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#featured">غذاهای منتخب</a></li>
+        <li><a href="#categories">دسته‌بندی‌ها</a></li>
+        <li><a href="#map">نقشهٔ طعم‌ها</a></li>
+        <li><a href="#explore">کاوش غذاها</a></li>
+        <li><a href="#about">درباره</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <button class="icon-btn" id="themeToggle" aria-label="تغییر حالت روشن و تاریک" title="حالت روشن/تاریک">
+          <span class="theme-icon theme-icon--moon">🌙</span>
+          <span class="theme-icon theme-icon--sun">☀️</span>
+        </button>
+        <button class="icon-btn nav__burger" id="navBurger" aria-label="باز و بستن منو" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ بخش معرفی (Hero) ============ -->
+    <section class="hero" id="hero">
+      <div class="hero__bg" aria-hidden="true">
+        <span class="blob blob--1"></span>
+        <span class="blob blob--2"></span>
+        <span class="blob blob--3"></span>
+      </div>
+
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <span class="badge reveal">دانشنامهٔ دیجیتال آشپزی ایران</span>
+          <h1 class="hero__title reveal">
+            سفری به <span class="gradient-text">دنیای طعم‌ها</span><br />
+            و فرهنگِ آشپزی ایران
+          </h1>
+          <p class="hero__desc reveal">
+            از قورمه‌سبزیِ معطر تا فالودهٔ خنک شیراز؛ هزاران سال تاریخ، فرهنگ و هنر
+            در هر لقمه از خوراک ایرانی نهفته است. اینجا با تاریخچه، مواد اولیه و
+            خاستگاهِ اصیل‌ترین غذاهای ایران آشنا شوید.
+          </p>
+          <div class="hero__cta reveal">
+            <a href="#explore" class="btn btn--primary">شروع کاوش</a>
+            <a href="#map" class="btn btn--ghost">نقشهٔ تعاملی ایران</a>
+          </div>
+
+          <div class="hero__stats reveal">
+            <div class="stat"><b data-count="32">۰</b><span>غذای ثبت‌شده</span></div>
+            <div class="stat"><b data-count="16">۰</b><span>استان</span></div>
+            <div class="stat"><b data-count="8">۰</b><span>دستهٔ غذایی</span></div>
+          </div>
+        </div>
+
+        <div class="hero__visual reveal" aria-hidden="true">
+          <div class="dish-orbit">
+            <div class="dish-orbit__center glass">
+              <span class="dish-orbit__emoji">🍚</span>
+              <span class="dish-orbit__label">خوراک ایرانی</span>
+            </div>
+            <span class="orbit-item" style="--i:0">🍢</span>
+            <span class="orbit-item" style="--i:1">🍲</span>
+            <span class="orbit-item" style="--i:2">🐟</span>
+            <span class="orbit-item" style="--i:3">🥣</span>
+            <span class="orbit-item" style="--i:4">🍮</span>
+            <span class="orbit-item" style="--i:5">🫘</span>
+          </div>
+        </div>
+      </div>
+
+      <a href="#featured" class="hero__scroll" aria-label="پیمایش به پایین">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ============ غذاهای منتخب ============ -->
+    <section class="section" id="featured">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__eyebrow">برگزیده‌ها</span>
+          <h2 class="section__title">غذاهای منتخب ایران</h2>
+          <p class="section__lead">شاهکارهایی که نام آشپزی ایران را در جهان پرآوازه کرده‌اند.</p>
+        </header>
+        <div class="featured-grid" id="featuredGrid"><!-- با جاوااسکریپت پر می‌شود --></div>
+      </div>
+    </section>
+
+    <!-- ============ دسته‌بندی‌ها ============ -->
+    <section class="section section--alt" id="categories">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__eyebrow">گونه‌های خوراک</span>
+          <h2 class="section__title">کاوش بر اساس دسته‌بندی</h2>
+          <p class="section__lead">از خورش‌های اصیل تا دسرهای خنک؛ هر دسته دنیایی از طعم است.</p>
+        </header>
+        <div class="category-grid" id="categoryGrid"><!-- پویا --></div>
+      </div>
+    </section>
+
+    <!-- ============ نقشهٔ تعاملی ============ -->
+    <section class="section" id="map">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__eyebrow">نقشهٔ تعاملی</span>
+          <h2 class="section__title">طعم‌ها را روی نقشهٔ ایران کشف کنید</h2>
+          <p class="section__lead">روی هر استان کلیک کنید تا غذاهای آن منطقه نمایان شوند.</p>
+        </header>
+
+        <div class="map-wrap reveal">
+          <div class="map-stage glass">
+            <svg class="iran-map" viewBox="0 0 820 760" role="img" aria-label="نقشهٔ ایران">
+              <defs>
+                <linearGradient id="mapFill" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="var(--map-1)" />
+                  <stop offset="1" stop-color="var(--map-2)" />
+                </linearGradient>
+              </defs>
+              <path class="iran-map__land" d="M196 150 L300 120 L360 96 L430 92 L470 70 L520 92 L560 80 L612 110 L640 150 L700 168 L760 210 L774 270 L740 300 L770 340 L742 392 L690 430 L700 500 L660 560 L612 600 L640 660 L590 690 L520 660 L470 690 L430 660 L380 690 L330 650 L300 560 L250 520 L210 470 L240 420 L200 380 L170 330 L150 280 L130 230 L150 188 Z" />
+              <g id="mapPins"><!-- سنجاق‌ها پویا --></g>
+            </svg>
+          </div>
+
+          <aside class="map-panel glass" id="mapPanel">
+            <div class="map-panel__head">
+              <h3 id="mapPanelTitle">استانی را انتخاب کنید</h3>
+              <p id="mapPanelSub">برای دیدن غذاهای هر منطقه روی سنجاق‌های نقشه کلیک کنید.</p>
+            </div>
+            <div class="map-panel__list" id="mapPanelList"></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ کاوش و جستجو ============ -->
+    <section class="section section--alt" id="explore">
+      <div class="container">
+        <header class="section__head reveal">
+          <span class="section__eyebrow">دانشنامهٔ کامل</span>
+          <h2 class="section__title">همهٔ غذاها را کاوش کنید</h2>
+          <p class="section__lead">جستجو و فیلتر بر اساس استان، دسته‌بندی و مواد اولیه.</p>
+        </header>
+
+        <div class="toolbar glass reveal">
+          <div class="search">
+            <span class="search__icon">🔍</span>
+            <input type="search" id="searchInput" placeholder="جستجوی غذا، شهر یا ماده اولیه…" aria-label="جستجوی غذا" />
+          </div>
+          <div class="toolbar__filters">
+            <label class="select">
+              <span>استان</span>
+              <select id="filterProvince" aria-label="فیلتر استان"></select>
+            </label>
+            <label class="select">
+              <span>دسته</span>
+              <select id="filterCategory" aria-label="فیلتر دسته‌بندی"></select>
+            </label>
+            <button class="btn btn--ghost btn--sm" id="resetFilters">پاک‌سازی</button>
+          </div>
+        </div>
+
+        <p class="result-count" id="resultCount" aria-live="polite"></p>
+        <div class="dish-grid" id="dishGrid"></div>
+        <p class="empty-state" id="emptyState" hidden>غذایی با این مشخصات یافت نشد. فیلترها را تغییر دهید.</p>
+      </div>
+    </section>
+
+    <!-- ============ درباره ============ -->
+    <section class="section about" id="about">
+      <div class="container about__inner">
+        <div class="about__content reveal">
+          <span class="section__eyebrow">دربارهٔ این دانشنامه</span>
+          <h2 class="section__title">میراثی خوردنی، به‌روایت طعم</h2>
+          <p>
+            آشپزی ایرانی یکی از کهن‌ترین و غنی‌ترین سنت‌های آشپزی جهان است؛ آمیزه‌ای از
+            تعادل ترش و شیرین، عطر زعفران و گلاب، و هنری که نسل‌به‌نسل منتقل شده است.
+            این دانشنامه می‌کوشد تا روایتگرِ داستانِ هر خوراک باشد: از کجا آمده، چگونه
+            پخته می‌شود و چه جایگاهی در فرهنگ مردم دارد.
+          </p>
+          <ul class="about__list">
+            <li>✦ معرفی دقیق هر غذا با تاریخچه و پیشینهٔ فرهنگی</li>
+            <li>✦ کاوش طعم‌ها بر اساس استان روی نقشهٔ تعاملی</li>
+            <li>✦ جستجو و فیلتر هوشمند بر اساس مواد اولیه و دسته‌بندی</li>
+          </ul>
+        </div>
+        <div class="about__cards reveal">
+          <div class="mini-card glass"><b>۲۵۰۰+</b><span>سال تاریخ آشپزی</span></div>
+          <div class="mini-card glass"><b>۳۱</b><span>استان پرتنوع</span></div>
+          <div class="mini-card glass"><b>زعفران</b><span>طلای سرخ ایران</span></div>
+          <div class="mini-card glass"><b>یلدا و نوروز</b><span>سفره‌های آیینی</span></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ پاورقی ============ -->
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#hero" class="brand">
+          <span class="brand__icon">🍲</span>
+          <span class="brand__text">دانشنامهٔ <b>خوراک ایرانی</b></span>
+        </a>
+        <p>سفری تصویری به دنیای طعم‌ها و فرهنگ آشپزی ایران؛ ساخته‌شده با عشق به میراث آشپزی این سرزمین.</p>
+      </div>
+      <div class="footer__col">
+        <h4>پیمایش</h4>
+        <a href="#featured">غذاهای منتخب</a>
+        <a href="#categories">دسته‌بندی‌ها</a>
+        <a href="#map">نقشهٔ طعم‌ها</a>
+        <a href="#explore">کاوش غذاها</a>
+      </div>
+      <div class="footer__col">
+        <h4>دسته‌های محبوب</h4>
+        <a href="#explore" data-jump-cat="khoresh">خورش‌ها</a>
+        <a href="#explore" data-jump-cat="kabab">کباب‌ها</a>
+        <a href="#explore" data-jump-cat="dessert">دسر و شیرینی</a>
+        <a href="#explore" data-jump-cat="seafood">غذاهای دریایی</a>
+      </div>
+      <div class="footer__col">
+        <h4>همراه ما باشید</h4>
+        <p class="footer__note">این مجموعه با هدف آموزشی و فرهنگی گردآوری شده است.</p>
+        <div class="footer__socials" aria-label="شبکه‌های اجتماعی">
+          <span class="icon-btn">📷</span>
+          <span class="icon-btn">✉️</span>
+          <span class="icon-btn">🌐</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom container">
+      <span>© ۱۴۰۵ دانشنامهٔ خوراک ایرانی — تمامی حقوق محفوظ است.</span>
+      <span>ساخته‌شده با ❤ برای دوستداران آشپزی ایرانی</span>
+    </div>
+  </footer>
+
+  <!-- ============ پنجرهٔ جزئیات غذا ============ -->
+  <div class="modal" id="dishModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal__overlay" data-close-modal></div>
+    <div class="modal__dialog glass" role="document">
+      <button class="modal__close icon-btn" data-close-modal aria-label="بستن">✕</button>
+      <div class="modal__body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <button class="to-top" id="toTop" aria-label="بازگشت به بالا">↑</button>
+
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
